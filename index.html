@@ -856,11 +856,12 @@
   }
 
   function catalogForType(answers){
+    // Language is now a direct, explicit choice (the bottom-sheet picker) —
+    // there is no more region step gating which languages are even visible,
+    // so titles are never hard-excluded by language here. The region is
+    // still used elsewhere (platformsIn) purely to pick which streaming
+    // services to display.
     var byType = DATA.filter(function(d){ return d.type === answers.type; });
-    var region = answers.region || "us";
-    if(region !== "in"){
-      byType = byType.filter(function(d){ return INDIAN_REGIONAL_LANGS.indexOf(d.lang) === -1; });
-    }
     var langOk = true;
     if(answers.lang && answers.lang !== "all"){
       var langMatch = byType.filter(function(d){ return d.lang === answers.lang; });
